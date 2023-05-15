@@ -1,6 +1,9 @@
 const express = require('express')
 const router = express.Router()
 const { getAllProducts, getProductsByUserId, createProduct, updateProduct, deleteProduct } = require('../controllers/productController')
+const verifyJWT = require('../middleware/verifyJWT')
+
+router.use(verifyJWT)
 
 router.route('/')
   .get(getAllProducts)
