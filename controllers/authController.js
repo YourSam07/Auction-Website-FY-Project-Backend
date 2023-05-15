@@ -6,7 +6,7 @@ const User = require('../models/userModel')
 // @desc Login User
 // @route /auth/login
 const loginUser = asyncHandler(async (req, res) => {
-  const { username, password } = req.body
+  const { username, password, roles } = req.body
 
   if (!username || !password) {
     res.status(400).json({ message: "All fields are required" })
@@ -29,7 +29,7 @@ const loginUser = asyncHandler(async (req, res) => {
     { expiresIn: '5m' }
   )
 
-  res.json({ accessToken })
+  res.json({ username, accessToken, roles })
 })
 
 module.exports = {
