@@ -18,18 +18,26 @@ const productSchema = mongoose.Schema({
     type: String,
     required: true
   },
+  description: {
+    type: String,
+    required: true
+  },
   bid_start_time: {
     type: Date,
   },
   bid_end_time: {
     type: Date,
-  }, 
+  },
   bid_start_price: {
     type: Number
+  },
+  img: {
+    data: Buffer,
+    contentType: String
   }
 },
-{
-  timestamps: true
-})
+  {
+    timestamps: true
+  })
 
 module.exports = mongoose.model("Products", productSchema)

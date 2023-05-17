@@ -26,7 +26,7 @@ const loginUser = asyncHandler(async (req, res) => {
       },
     },
     `${process.env.JWT_SECRET_KEY}`,
-    { expiresIn: '5m' }
+    // { expiresIn: '5d' }
   )
 
   res.json({ username, accessToken, roles })
