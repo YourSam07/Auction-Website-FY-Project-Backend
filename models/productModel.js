@@ -10,6 +10,10 @@ const productSchema = mongoose.Schema({
     required: true,
     ref: 'User'
   },
+  description: {
+    type: String,
+    required: true
+  },
   sold_to: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Buyer'
@@ -23,13 +27,17 @@ const productSchema = mongoose.Schema({
   },
   bid_end_time: {
     type: Date,
-  }, 
+  },
   bid_start_price: {
     type: Number
+  },
+  img: {
+    data: Buffer,
+    contentType: String
   }
 },
 {
-  timestamps: true
-})
+    timestamps: true
+  })
 
 module.exports = mongoose.model("Products", productSchema)
