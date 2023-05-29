@@ -8,7 +8,6 @@ const verifyJWT = (req, res, next) => {
     }
 
     const token = authHeader.split(' ')[1]
-    console.log(token)
 
     jwt.verify(
         token,
