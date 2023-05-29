@@ -29,7 +29,7 @@ const loginUser = asyncHandler(async (req, res) => {
     // { expiresIn: '5d' }
   )
 
-  res.json({ username, accessToken, roles })
+  res.json({ username, accessToken, roles, uid: user._id })
 })
 
 module.exports = {

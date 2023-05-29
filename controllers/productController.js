@@ -24,18 +24,18 @@ const getProductsByUserId = asyncHandler(async(req, res) => {
 // @desc Create Product or List product for auction
 // @desc route POST /products
 const createProduct = asyncHandler(async(req, res) => {
-  const { uid, name, type, bid_start_time, bid_end_time, bid_start_price } = req.body
+  const { uid, name, type, description, bid_start_time, bid_end_time, bid_start_price } = req.body
 
   if (!uid){
     res.status(400).json({message: "Require an user Id to add a product"})
   }
   
-  if ( !name || !type || !bid_start_price ) {
+  if ( !name || !type || !bid_start_price || !description ) {
     res.status(400).json({ message: "All fields are required" })
   }
 
   const productObj = {
-    user: uid, name, type, bid_start_price, bid_end_time, bid_start_time
+    user: uid, name, type, description, bid_start_price, bid_end_time, bid_start_time
   }
 
   const product = await Products.create(productObj)
