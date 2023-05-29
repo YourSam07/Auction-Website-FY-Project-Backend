@@ -5,7 +5,6 @@ const connectDB = require('./config/db')
 const { logger, logEvents } = require('./middleware/logger')
 const { errorHandler } = require('./middleware/errorHandler')
 const mongoose = require('mongoose')
-const serverless = require("serverless-http");
 const port = process.env.PORT || 5757
 
 connectDB()
@@ -18,13 +17,9 @@ app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
-// app.use('/auth', require("./routes/authRoutes"))
-// app.use('/products', require("./routes/productRoutes"))
-// app.use("/users", require("./routes/userRoutes"))
-
-app.use('/.netlify/functions/api/auth', require("./routes/authRoutes"))
-app.use('/.netlify/functions/api/products', require("./routes/productRoutes"))
-app.use('/.netlify/functions/api/users', require("./routes/userRoutes"))
+app.use('/auth', require("./routes/authRoutes"))
+app.use('/products', require("./routes/productRoutes"))
+app.use("/users", require("./routes/userRoutes"))
 
 app.use(errorHandler)
 
@@ -39,6 +34,3 @@ mongoose.connection.on('error', (err) => {
   console.log(err)
   logEvents(`${err.no}: ${err.code}\t${err.syscall}\t${err.hostname}`, 'mongoErrLog.log')
 })
-
-module.exports = app
-module.exports.handler = serverless(app)
